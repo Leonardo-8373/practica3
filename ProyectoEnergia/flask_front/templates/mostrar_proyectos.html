@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lista de Proyectos</h1>
+<a href="/crear_proyecto" class="btn btn-success mb-3">Crear Proyecto</a>
+<div class="mb-3">
+    <a href="/ordenar_proyectos?criterio=id&orden=asc" class="btn btn-secondary">Ordenar por ID (Asc)</a>
+    <a href="/ordenar_proyectos?criterio=id&orden=desc" class="btn btn-secondary">Ordenar por ID (Desc)</a>
+    <a href="/ordenar_proyectos?criterio=nombre&orden=asc" class="btn btn-secondary">Ordenar por Nombre (Asc)</a>
+    <a href="/ordenar_proyectos?criterio=nombre&orden=desc" class="btn btn-secondary">Ordenar por Nombre (Desc)</a>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Inversión</th>
+            <th>Tiempo de Vida</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Inversionistas</th>
+            <th>Electricidad Generada (Diaria)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for proyecto in proyectos %}
+        <tr>
+            <td>{{ proyecto.id }}</td>
+            <td>{{ proyecto.nombre }}</td>
+            <td>{{ proyecto.descripcion }}</td>
+            <td>{{ proyecto.inversion }}</td>
+            <td>{{ proyecto.tiempoVida }}</td>
+            <td>{{ proyecto.fechaInicio }}</td>
+            <td>{{ proyecto.fechaFin }}</td>
+            <td>{{ proyecto.inversionistas | join(", ") }}</td>
+            <td>{{ proyecto.electricidadGeneradaDiaria }}</td>
+            <td>
+                <a href="/eliminar_proyecto/{{ proyecto.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
